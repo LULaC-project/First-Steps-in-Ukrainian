@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 Glossary — First Steps in Ukrainian</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #1B6B7B;
+    --teal-dark: #144f5a;
+    --teal-light: #e8f4f7;
+    --orange: #E8531C;
+    --orange-light: #fdf0eb;
+    --peach: #F9EDE8;
+    --lblue: #B8D4E8;
+    --ua-blue: #005BBB;
+    --ua-yellow: #FFD700;
+    --text: #2a2a2a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --green: #2d6a4f;
+    --purple: #6d28d9;
+    --purple-light: #f3f0ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #faf8f6;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header { background: var(--teal); }
+  .ua-flag-strip {
+    height: 6px;
+    background: linear-gradient(to bottom, var(--ua-blue) 50%, var(--ua-yellow) 50%);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .breadcrumb {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lblue);
+  }
+  .header-right { display: flex; gap: 10px; align-items: center; }
+  .badge {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.85);
+  }
+  .btn-print {
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: inherit;
+  }
+  .btn-print:hover { background: rgba(255,255,255,0.25); }
+
+  /* ── HERO ── */
+  .page-hero {
+    background: var(--teal);
+    padding: 40px 32px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-text {}
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lblue);
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .hero-title span { color: var(--ua-yellow); }
+  .hero-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+  }
+  .hero-count {
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 16px 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .hero-count-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--ua-yellow);
+    line-height: 1;
+  }
+  .hero-count-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+
+  .accent-bar { height: 4px; background: var(--orange); }
+
+  /* ── CONTROLS ── */
+  .controls-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 32px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #fff;
+  }
+  .search-wrap {
+    margin-left: auto;
+    position: relative;
+  }
+  .search-wrap input {
+    padding: 8px 14px 8px 36px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text);
+    background: #fff;
+    outline: none;
+    width: 200px;
+    transition: border-color 0.15s;
+  }
+  .search-wrap input:focus { border-color: var(--teal); }
+  .search-wrap::before {
+    content: '🔍';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    pointer-events: none;
+  }
+
+  /* ── GRID ── */
+  .glossary-grid {
+    max-width: 1100px;
+    margin: 24px auto 80px;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  /* ── WORD CARD ── */
+  .word-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .word-card:hover {
+    box-shadow: 0 6px 24px rgba(27,107,123,0.1);
+    transform: translateY(-2px);
+  }
+  .word-card[data-hidden="true"] { display: none; }
+
+  .card-top {
+    padding: 20px 20px 14px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .card-ua {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .card-num { display: none; }
+  .card-roman {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .audio-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+    color: #fff;
+    font-size: 16px;
+  }
+  .audio-btn:hover { background: var(--teal-dark); transform: scale(1.08); }
+  .audio-btn.playing { background: var(--orange); }
+
+  .card-divider { height: 1px; background: var(--border); margin: 0 20px; }
+
+  .card-bottom {
+    padding: 14px 20px 18px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    flex: 1;
+  }
+  .card-en {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+  .card-type {
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 2px;
+  }
+
+  /* type colours */
+  .type-noun       { background: var(--teal-light);  color: var(--teal); }
+  .type-pronoun    { background: var(--purple-light); color: var(--purple); }
+  .type-adverb     { background: #fef3c7; color: #92400e; }
+  .type-particle   { background: #e0f2fe; color: #0369a1; }
+  .type-interjection { background: var(--orange-light); color: var(--orange); }
+  .type-numeral    { background: #f0fdf4; color: #166534; }
+  .type-proper-noun { background: #fdf4ff; color: #7e22ce; }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-size: 15px;
+    display: none;
+  }
+  .empty-state.visible { display: block; }
+  .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
+
+  /* ── FOOTER ── */
+  .page-footer { background: var(--teal); padding: 24px 32px; margin-top: 0; }
+  .page-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-nav { display: flex; gap: 24px; }
+  .footer-nav a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; }
+  .footer-nav a:hover { color: #fff; }
+  .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.45); font-style: italic; }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    body { background: #fff; }
+    .site-header, .page-hero, .accent-bar, .controls-bar,
+    .audio-btn, .page-footer { display: none !important; }
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 20px;
+      margin: 0;
+    }
+    .word-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      break-inside: avoid;
+      box-shadow: none;
+      transform: none;
+    }
+    .card-ua { font-size: 24px; color: #1B6B7B; }
+    .card-top { padding: 12px 14px 10px; }
+    .card-bottom { padding: 10px 14px 12px; }
+    @page { margin: 1.5cm; size: A4; }
+  }
+
+  @media (max-width: 600px) {
+    .glossary-grid { grid-template-columns: 1fr; padding: 0 16px; }
+    .controls-bar { padding: 16px 16px 0; }
+    .search-wrap { margin-left: 0; width: 100%; }
+    .search-wrap input { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="ua-flag-strip"></div>
+  <div class="header-inner">
+    <div class="breadcrumb">First Steps in Ukrainian &nbsp;·&nbsp; Week 1 &nbsp;·&nbsp; Day 1 &nbsp;·&nbsp; Glossary</div>
+    <div class="header-right">
+      <span class="badge">A1 Beginner</span>
+      <button class="btn-print" onclick="window.print()">🖨 Print / Save PDF</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="page-hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Day 1 Vocabulary</div>
+      <div class="hero-title">Glossary — <span>День 1</span></div>
+      <div class="hero-subtitle">All the words you need for Day 1 — with pronunciation, romanisation &amp; word type</div>
+    </div>
+    <div class="hero-count">
+      <div class="hero-count-num">20</div>
+      <div class="hero-count-label">words</div>
+    </div>
+  </div>
+</section>
+<div class="accent-bar"></div>
+
+<!-- ── FILTER + SEARCH ── -->
+<div class="controls-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+  <button class="filter-btn" onclick="filterCards('noun', this)">Nouns</button>
+  <button class="filter-btn" onclick="filterCards('pronoun', this)">Pronouns</button>
+  <button class="filter-btn" onclick="filterCards('adverb', this)">Adverbs</button>
+  <button class="filter-btn" onclick="filterCards('particle', this)">Particles</button>
+  <button class="filter-btn" onclick="filterCards('other', this)">Other</button>
+  <div class="search-wrap">
+    <input type="text" id="search-input" placeholder="Search…" oninput="searchCards(this.value)">
+  </div>
+</div>
+
+<!-- ── GLOSSARY GRID ── -->
+<div class="glossary-grid" id="glossary-grid">
+
+  <!-- 1 банк -->
+  <div class="word-card reveal" data-type="noun" data-ua="банк" data-en="bank" style="transition-delay:0.00s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#01</div>
+        <div class="card-ua">банк</div>
+        <div class="card-roman">bank</div>
+      </div>
+      <button class="audio-btn" onclick="speak('банк')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">bank</div>
+      <span class="card-type type-noun">noun</span>
+    </div>
+  </div>
+
+  <!-- 2 бувай -->
+  <div class="word-card reveal" data-type="interjection" data-ua="бувай" data-en="bye / see you" style="transition-delay:0.03s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#02</div>
+        <div class="card-ua">бувай</div>
+        <div class="card-roman">buvay</div>
+      </div>
+      <button class="audio-btn" onclick="speak('бувай')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">bye / see you</div>
+      <span class="card-type type-interjection">interjection</span>
+    </div>
+  </div>
+
+  <!-- 3 вдома -->
+  <div class="word-card reveal" data-type="adverb" data-ua="вдома" data-en="at home" style="transition-delay:0.06s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#03</div>
+        <div class="card-ua">вдо́ма</div>
+        <div class="card-roman">vdoma</div>
+      </div>
+      <button class="audio-btn" onclick="speak('вдома')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">at home</div>
+      <span class="card-type type-adverb">adverb</span>
+    </div>
+  </div>
+
+  <!-- 4 ви -->
+  <div class="word-card reveal" data-type="pronoun" data-ua="ви" data-en="you (plural / formal)" style="transition-delay:0.09s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#04</div>
+        <div class="card-ua">ви</div>
+        <div class="card-roman">vy</div>
+      </div>
+      <button class="audio-btn" onclick="speak('ви')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">you <span style="color:var(--muted);font-weight:400;font-size:14px">(plural / formal)</span></div>
+      <span class="card-type type-pronoun">pronoun</span>
+    </div>
+  </div>
+
+  <!-- 5 вода -->
+  <div class="word-card reveal" data-type="noun" data-ua="вода" data-en="water" style="transition-delay:0.12s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#05</div>
+        <div class="card-ua">вода́</div>
+        <div class="card-roman">voda</div>
+      </div>
+      <button class="audio-btn" onclick="speak('вода')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">water</div>
+      <span class="card-type type-noun">noun</span>
+    </div>
+  </div>
+
+  <!-- 6 дата -->
+  <div class="word-card reveal" data-type="noun" data-ua="дата" data-en="date" style="transition-delay:0.15s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#06</div>
+        <div class="card-ua">да́та</div>
+        <div class="card-roman">data</div>
+      </div>
+      <button class="audio-btn" onclick="speak('дата')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">date</div>
+      <span class="card-type type-noun">noun</span>
+    </div>
+  </div>
+
+  <!-- 7 де -->
+  <div class="word-card reveal" data-type="adverb" data-ua="де" data-en="where" style="transition-delay:0.18s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#07</div>
+        <div class="card-ua">де</div>
+        <div class="card-roman">de</div>
+      </div>
+      <button class="audio-btn" onclick="speak('де')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">where</div>
+      <span class="card-type type-adverb">adverb</span>
+    </div>
+  </div>
+
+  <!-- 8 документ -->
+  <div class="word-card reveal" data-type="noun" data-ua="документ" data-en="document" style="transition-delay:0.21s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#08</div>
+        <div class="card-ua">докуме́нт</div>
+        <div class="card-roman">dokument</div>
+      </div>
+      <button class="audio-btn" onclick="speak('документ')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">document</div>
+      <span class="card-type type-noun">noun</span>
+    </div>
+  </div>
+
+  <!-- 9 кава -->
+  <div class="word-card reveal" data-type="noun" data-ua="кава" data-en="coffee" style="transition-delay:0.24s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#09</div>
+        <div class="card-ua">ка́ва</div>
+        <div class="card-roman">kava</div>
+      </div>
+      <button class="audio-btn" onclick="speak('кава')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">coffee</div>
+      <span class="card-type type-noun">noun</span>
+    </div>
+  </div>
+
+  <!-- 10 мама -->
+  <div class="word-card reveal" data-type="noun" data-ua="мама" data-en="mom / mother" style="transition-delay:0.27s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#10</div>
+        <div class="card-ua">ма́ма</div>
+        <div class="card-roman">mama</div>
+      </div>
+      <button class="audio-btn" onclick="speak('мама')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">mom / mother</div>
+      <span class="card-type type-noun">noun</span>
+    </div>
+  </div>
+
+  <!-- 11 Марі -->
+  <div class="word-card reveal" data-type="proper-noun" data-ua="Марі" data-en="Maria (proper name)" style="transition-delay:0.30s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#11</div>
+        <div class="card-ua">Марі́</div>
+        <div class="card-roman">Mari</div>
+      </div>
+      <button class="audio-btn" onclick="speak('Марі')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">Maria <span style="color:var(--muted);font-weight:400;font-size:14px">(proper name)</span></div>
+      <span class="card-type type-proper-noun">proper noun</span>
+    </div>
+  </div>
+
+  <!-- 12 ми -->
+  <div class="word-card reveal" data-type="pronoun" data-ua="ми" data-en="we" style="transition-delay:0.33s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#12</div>
+        <div class="card-ua">ми</div>
+        <div class="card-roman">my</div>
+      </div>
+      <button class="audio-btn" onclick="speak('ми')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">we</div>
+      <span class="card-type type-pronoun">pronoun</span>
+    </div>
+  </div>
+
+  <!-- 13 мій -->
+  <div class="word-card reveal" data-type="pronoun" data-ua="мій" data-en="my / mine" style="transition-delay:0.36s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#13</div>
+        <div class="card-ua">мій</div>
+        <div class="card-roman">miy</div>
+      </div>
+      <button class="audio-btn" onclick="speak('мій')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">my / mine</div>
+      <span class="card-type type-pronoun">pronoun</span>
+    </div>
+  </div>
+
+  <!-- 14 один -->
+  <div class="word-card reveal" data-type="numeral" data-ua="один" data-en="one" style="transition-delay:0.39s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#14</div>
+        <div class="card-ua">оди́н</div>
+        <div class="card-roman">odyn</div>
+      </div>
+      <button class="audio-btn" onclick="speak('один')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">one</div>
+      <span class="card-type type-numeral">numeral</span>
+    </div>
+  </div>
+
+  <!-- 15 там -->
+  <div class="word-card reveal" data-type="adverb" data-ua="там" data-en="there" style="transition-delay:0.42s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#15</div>
+        <div class="card-ua">там</div>
+        <div class="card-roman">tam</div>
+      </div>
+      <button class="audio-btn" onclick="speak('там')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">there</div>
+      <span class="card-type type-adverb">adverb</span>
+    </div>
+  </div>
+
+  <!-- 16 тато -->
+  <div class="word-card reveal" data-type="noun" data-ua="тато" data-en="dad / father" style="transition-delay:0.45s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#16</div>
+        <div class="card-ua">та́то</div>
+        <div class="card-roman">tato</div>
+      </div>
+      <button class="audio-btn" onclick="speak('тато')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">dad / father</div>
+      <span class="card-type type-noun">noun</span>
+    </div>
+  </div>
+
+  <!-- 17 твій -->
+  <div class="word-card reveal" data-type="pronoun" data-ua="твій" data-en="your / yours" style="transition-delay:0.48s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#17</div>
+        <div class="card-ua">твій</div>
+        <div class="card-roman">tviy</div>
+      </div>
+      <button class="audio-btn" onclick="speak('твій')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">your / yours</div>
+      <span class="card-type type-pronoun">pronoun</span>
+    </div>
+  </div>
+
+  <!-- 18 ти -->
+  <div class="word-card reveal" data-type="pronoun" data-ua="ти" data-en="you (singular / informal)" style="transition-delay:0.51s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#18</div>
+        <div class="card-ua">ти</div>
+        <div class="card-roman">ty</div>
+      </div>
+      <button class="audio-btn" onclick="speak('ти')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">you <span style="color:var(--muted);font-weight:400;font-size:14px">(singular / informal)</span></div>
+      <span class="card-type type-pronoun">pronoun</span>
+    </div>
+  </div>
+
+  <!-- 19 тут -->
+  <div class="word-card reveal" data-type="adverb" data-ua="тут" data-en="here" style="transition-delay:0.54s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#19</div>
+        <div class="card-ua">тут</div>
+        <div class="card-roman">tut</div>
+      </div>
+      <button class="audio-btn" onclick="speak('тут')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">here</div>
+      <span class="card-type type-adverb">adverb</span>
+    </div>
+  </div>
+
+  <!-- 20 це -->
+  <div class="word-card reveal" data-type="particle" data-ua="це" data-en="this / it" style="transition-delay:0.57s">
+    <div class="card-top">
+      <div>
+        <div class="card-num">#20</div>
+        <div class="card-ua">це</div>
+        <div class="card-roman">tse</div>
+      </div>
+      <button class="audio-btn" onclick="speak('це')" title="Hear pronunciation">▶</button>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bottom">
+      <div class="card-en">this / it</div>
+      <span class="card-type type-particle">pronoun</span>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" id="empty-state">
+    <div class="empty-icon">🔍</div>
+    No words match your search.
+  </div>
+
+</div><!-- /glossary-grid -->
+
+<!-- ── FOOTER ── -->
+<footer class="page-footer">
+  <div class="page-footer-inner">
+    <div class="footer-tagline">First Steps in Ukrainian · Week 1 · Day 1</div>
+    <div class="footer-nav">
+      <a href="day1.html">← Day 1</a>
+      <a href="ukrainian_sentences_guide.html">Sentences guide</a>
+      <a href="ukrainian_vowels.html">Vowels guide</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── SPEECH ── */
+  function speak(word) {
+    if (!('speechSynthesis' in window)) {
+      alert('Speech synthesis is not supported in your browser.');
+      return;
+    }
+    window.speechSynthesis.cancel();
+
+    const utt = new SpeechSynthesisUtterance(word);
+    utt.lang = 'uk-UA';
+    utt.rate = 0.85;
+    utt.pitch = 1;
+
+    // Try to find a Ukrainian voice; fall back gracefully
+    const voices = window.speechSynthesis.getVoices();
+    const ukVoice = voices.find(v => v.lang === 'uk-UA') ||
+                    voices.find(v => v.lang.startsWith('uk')) ||
+                    null;
+    if (ukVoice) utt.voice = ukVoice;
+
+    // Visual feedback
+    const btn = event.currentTarget;
+    btn.textContent = '◼';
+    btn.classList.add('playing');
+    utt.onend = () => { btn.textContent = '▶'; btn.classList.remove('playing'); };
+    utt.onerror = () => { btn.textContent = '▶'; btn.classList.remove('playing'); };
+
+    window.speechSynthesis.speak(utt);
+  }
+
+  // Load voices (Chrome needs this)
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    window.speechSynthesis.getVoices();
+  }
+
+  /* ── FILTER ── */
+  function filterCards(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.word-card');
+    const otherTypes = ['interjection', 'numeral', 'proper-noun'];
+
+    cards.forEach(card => {
+      const cardType = card.dataset.type;
+      let show = false;
+      if (type === 'all') show = true;
+      else if (type === 'other') show = otherTypes.includes(cardType);
+      else show = cardType === type;
+      card.dataset.hidden = show ? 'false' : 'true';
+    });
+
+    checkEmpty();
+  }
+
+  /* ── SEARCH ── */
+  function searchCards(query) {
+    const q = query.toLowerCase().trim();
+    const cards = document.querySelectorAll('.word-card');
+
+    cards.forEach(card => {
+      const ua = card.dataset.ua.toLowerCase();
+      const en = card.dataset.en.toLowerCase();
+      const match = !q || ua.includes(q) || en.includes(q);
+      card.dataset.hidden = match ? 'false' : 'true';
+    });
+
+    checkEmpty();
+  }
+
+  function checkEmpty() {
+    const visible = [...document.querySelectorAll('.word-card')]
+      .filter(c => c.dataset.hidden !== 'true').length;
+    document.getElementById('empty-state').classList.toggle('visible', visible === 0);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.05 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
